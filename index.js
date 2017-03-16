@@ -15,9 +15,18 @@ var Module = function (bot) {
 
   this.commands.wolfram = function(channel, args, user) {
     if (!args) bot.postMessage(channel, "Invalid Request");
+    var debug = false;
+    if (argv.slice(0,5)==="debug")) {
+      debug=true:
+      args = args.slice(5);
+    }
     wolfram.query(args, function(error, result) {
       if (error) console.log(error);
-      bot.postMessage(channel, "```"+JSON.stringify(result, null, 2)+"```");
+      var answer = _.find(result, 'primary');
+      var response = answer.title + ":\n" + _.map(answer.subpods, function(s) { return value; }).join("\n");
+      bot.postMessage(channel, response);
+      
+      if (debug) bot.postMessage(channel, "```"+JSON.stringify(result, null, 2)+"```");
     });
   };
 
