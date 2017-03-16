@@ -19,5 +19,8 @@
   "dependencies": {
     "lodash": "^4.17.4",
     "wolfram": "^0.3.4"
+  },
+  "commands": {
+    "wolfram": "ask anything"
   }
 }

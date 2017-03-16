@@ -1,15 +1,14 @@
+var package = require('./package.json');
 var _ = require('lodash');
 var wolfram = require('wolfram').createClient(process.env.WOLFRAM_APPID);
 
 var Module = function (bot) {
   this.bot = bot;
-  this.name = "Wofram Library";
-  this.version = "0.2";
+  this.name = package.name;
+  this.version = package.version;
   this.help = function () {
     // RETURN HELP STRING FOR YOUR COMMANDS or AT LEAST YOUR COMMANDS Object.keys(this.commands)
-    return {
-      "wolfram": "ask anything",
-    };
+    return package.commands;
   };
   this.commands = {};
 
