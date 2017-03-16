@@ -27,6 +27,7 @@ var Module = function (bot) {
         var answer = _.find(result, 'primary');
         if (result.length && answer) {
           var response = answer.title + ":\n" + _.map(answer.subpods, function(s) { return s.value; }).join("\n");
+          if (_.get(answer,"subpods[0].image")) response + "\n" + _.get(answer,"subpods[0].image");
           bot.updateMessage(channel, ts, response);
         } else {
           bot.updateMessage(channel, ts, "EVEN Wolfram doesn't know!");
