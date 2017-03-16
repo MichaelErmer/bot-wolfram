@@ -23,9 +23,13 @@ var Module = function (bot) {
     wolfram.query(args, function(error, result) {
       if (error) console.log(error);
       var answer = _.find(result, 'primary');
-      var response = answer.title + ":\n" + _.map(answer.subpods, function(s) { return s.value; }).join("\n");
-      bot.postMessage(channel, response);
-      
+      if (result.length && ansert) {
+        var response = answer.title + ":\n" + _.map(answer.subpods, function(s) { return s.value; }).join("\n");
+        bot.postMessage(channel, response);
+      } else {
+        bot.postMessage(channel, "EVEN Wolfram doesn't know!");
+      }
+       
       if (debug) bot.postMessage(channel, "```"+JSON.stringify(result, null, 2)+"```");
     });
   };
