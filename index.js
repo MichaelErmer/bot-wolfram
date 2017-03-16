@@ -23,7 +23,7 @@ var Module = function (bot) {
     wolfram.query(args, function(error, result) {
       if (error) console.log(error);
       var answer = _.find(result, 'primary');
-      var response = answer.title + ":\n" + _.map(answer.subpods, function(s) { return value; }).join("\n");
+      var response = answer.title + ":\n" + _.map(answer.subpods, function(s) { return s.value; }).join("\n");
       bot.postMessage(channel, response);
       
       if (debug) bot.postMessage(channel, "```"+JSON.stringify(result, null, 2)+"```");
