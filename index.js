@@ -19,17 +19,21 @@ var Module = function (bot) {
       debug=true;
       args = args.slice(5);
     }
-    wolfram.query(args, function(error, result) {
-      if (error) console.log(error);
-      var answer = _.find(result, 'primary');
-      if (result.length && answer) {
-        var response = answer.title + ":\n" + _.map(answer.subpods, function(s) { return s.value; }).join("\n");
-        bot.postMessage(channel, response);
-      } else {
-        bot.postMessage(channel, "EVEN Wolfram doesn't know!");
-      }
-       
-      if (debug) bot.postMessage(channel, "```"+JSON.stringify(result, null, 2)+"```");
+    bot.postMessage(channel, "Asking Wolfram... ")
+      .then(function(data) {
+        var ts = data.ts;
+      wolfram.query(args, function(error, result) {
+        if (error) console.log(error);
+        var answer = _.find(result, 'primary');
+        if (result.length && answer) {
+          var response = answer.title + ":\n" + _.map(answer.subpods, function(s) { return s.value; }).join("\n");
+          bot.updateMessage(channel, ts, response);
+        } else {
+          bot.updateMessage(channel, ts, "EVEN Wolfram doesn't know!");
+        }
+         
+        if (debug) bot.postMessage(channel, "```"+JSON.stringify(result, null, 2)+"```");
+      });
     });
   };
 
