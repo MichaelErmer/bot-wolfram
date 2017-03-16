@@ -1,5 +1,5 @@
 var _ = require('lodash');
-var wolfram = require('wolfram').createClient(provess.env.WOLFRAM_APPID);
+var wolfram = require('wolfram').createClient(process.env.WOLFRAM_APPID);
 
 var Module = function (bot) {
   this.bot = bot;
