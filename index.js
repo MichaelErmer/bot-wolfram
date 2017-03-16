@@ -17,7 +17,7 @@ var Module = function (bot) {
     if (!args) bot.postMessage(channel, "Invalid Request");
     var debug = false;
     if (argv.slice(0,5)==="debug") {
-      debug=true:
+      debug=true;
       args = args.slice(5);
     }
     wolfram.query(args, function(error, result) {
